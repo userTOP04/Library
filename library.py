@@ -38,7 +38,6 @@ def show_books() -> None:
         print(f"автор: {book['автор']}")
         print(f"год: {book['год']}")
         print("")
-    visit_library()
 
 
 def add_book() -> None:
@@ -73,7 +72,6 @@ def add_book() -> None:
 
     library.append(book)
     print("Книга успешно добавлена в библиотеку!")
-    return visit_library()
 
 def remove_book() -> None:
     """ удаляет книгу из библиотеки по порядковму номеру ( >0 ) """
@@ -129,7 +127,6 @@ def find_book_by_number() -> None:
     print(f"название: {book['название']}")
     print(f"автор: {book['автор']}")
     print(f"год: {book['год']}")
-    return visit_library()
 
 
 def search_book_by_key(user_key: str) -> None:
@@ -153,6 +150,7 @@ def search_book_by_key(user_key: str) -> None:
     books_found = 0
     for book in library:
         if book[user_key] == user_value:
+            books_found += 1
             print(f"номер на полке: {library.index(book) + 1}")
             print(f"название: {book['название']}")
             print(f"автор: {book['автор']}")
@@ -164,28 +162,46 @@ def search_book_by_key(user_key: str) -> None:
 
 
 
-
-    return visit_library()
-
-
 def visit_library() -> None:
-    print("Приветствуем вас в библиотеке, что вы хотите сделать")
-    print("1-Показать книгу,2-Добавить книгу,3-Удалить книгу,4-Показать книгу по порядковому номеру,5-Найти книгу по названию,6-Найти книгу по автору,7-Найти книгу по году")
-    key_library = input("Введите номер и нажмите ENTER")
-    if key_library == "1":
-        return show_books()    
-    elif key_library == "2":
-        return add_book()    
-    elif key_library == "3":
-        return remove_book()    
-    elif key_library == "4":
-        return find_book_by_number()
-    elif key_library == "5":
-        return search_book_by_key('название')
-    elif key_library == "6":
-        return search_book_by_key('автор')
-    elif key_library == "7":
-        return search_book_by_key('год')
+    while True:
+        os.system("cls")
+        print("Приветствуем вас в библиотеке, что вы хотите сделать")
+        
+
+        options = [
+            "Показать книгу",
+            "Добавить книгу",
+            "Удалить книгу",
+            "Показать книгу по порядковому номеру",
+            "Найти книгу по названию",
+            "Найти книгу по автору",
+            "Найти книгу по году",
+            "Выйти из програмы",
+        ]
+
+        for num, option in enumerate(options):
+            print(f"{num}. {option}")
+
+
+        key_library = input("Введите номер и нажмите ENTER")
+        if key_library == "0":
+            return show_books()    
+        elif key_library == "1":
+            return add_book()    
+        elif key_library == "2":
+            return remove_book()    
+        elif key_library == "3":
+            return find_book_by_number()
+        elif key_library == "4":
+            return search_book_by_key('название')
+        elif key_library == "5":
+            return search_book_by_key('автор')
+        elif key_library == "6":
+            return search_book_by_key('год')
+        elif key_library == "7":
+            break
+        else:
+            ("Неверная опция, попробуйте ввести другую!")
 
 
 
