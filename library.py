@@ -1,3 +1,4 @@
+
 import os
 
 
@@ -28,7 +29,7 @@ library = [
 
 def show_books() -> None:
     """ выводит на экран все книги библиотеки, пронумеровав их с 1 """
-    
+    os.system("cls")
     if not library:
         print("Библиотека пуста")
         return
@@ -38,11 +39,12 @@ def show_books() -> None:
         print(f"автор: {book['автор']}")
         print(f"год: {book['год']}")
         print("")
+    return
 
 
 def add_book() -> None:
     """ добавляет книгу в библиотеку, в книге обязательно заполненыф 3 поля """
-    
+    os.system("cls")
     title = input("Введите название книги: ")
     if not title:
         print("Ошибка! Нет названия.")
@@ -72,6 +74,7 @@ def add_book() -> None:
 
     library.append(book)
     print("Книга успешно добавлена в библиотеку!")
+    return
 
 def remove_book() -> None:
     """ удаляет книгу из библиотеки по порядковму номеру ( >0 ) """
@@ -96,7 +99,8 @@ def remove_book() -> None:
 
     print(f"Книга {library[idx]} удалена")
     library.pop(idx)
-    return visit_library()
+    return 
+
 
     
 def find_book_by_number() -> None:
@@ -127,10 +131,12 @@ def find_book_by_number() -> None:
     print(f"название: {book['название']}")
     print(f"автор: {book['автор']}")
     print(f"год: {book['год']}")
+    return
 
 
 def search_book_by_key(user_key: str) -> None:
     """Показывает книгу по ключу, если он есть """
+    os.system("cls")
     
     if not library:
         print("В библиотеке нет книг")
@@ -159,15 +165,14 @@ def search_book_by_key(user_key: str) -> None:
 
     if not books_found:
         print("Книг не найдено, возможно вы ввели не верные смоволы, пожалуйста препроверьте")
+    return
 
 
 
 def visit_library() -> None:
     while True:
-        os.system("cls")
         print("Приветствуем вас в библиотеке, что вы хотите сделать")
         
-
         options = [
             "Показать книгу",
             "Добавить книгу",
@@ -182,22 +187,21 @@ def visit_library() -> None:
         for num, option in enumerate(options):
             print(f"{num}. {option}")
 
-
         key_library = input("Введите номер и нажмите ENTER")
         if key_library == "0":
-            return show_books()    
+            show_books()    
         elif key_library == "1":
-            return add_book()    
+            add_book()    
         elif key_library == "2":
-            return remove_book()    
+            remove_book()    
         elif key_library == "3":
-            return find_book_by_number()
+            find_book_by_number()
         elif key_library == "4":
-            return search_book_by_key('название')
+            search_book_by_key('название')
         elif key_library == "5":
-            return search_book_by_key('автор')
+            search_book_by_key('автор')
         elif key_library == "6":
-            return search_book_by_key('год')
+            search_book_by_key('год')
         elif key_library == "7":
             break
         else:
