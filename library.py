@@ -1,4 +1,4 @@
-
+import sys
 import os
 
 
@@ -39,7 +39,6 @@ def show_books() -> None:
         print(f"автор: {book['автор']}")
         print(f"год: {book['год']}")
         print("")
-    return
 
 
 def add_book() -> None:
@@ -134,6 +133,11 @@ def find_book_by_number() -> None:
     return
 
 
+def close_librery() -> None:
+    print("Вы вышли из програмы")
+    sys.exit
+
+
 def search_book_by_key(user_key: str) -> None:
     """Показывает книгу по ключу, если он есть """
     os.system("cls")
@@ -174,40 +178,28 @@ def visit_library() -> None:
         print("Приветствуем вас в библиотеке, что вы хотите сделать")
         
         options = [
-            "Показать книгу",
-            "Добавить книгу",
-            "Удалить книгу",
-            "Показать книгу по порядковому номеру",
-            "Найти книгу по названию",
-            "Найти книгу по автору",
-            "Найти книгу по году",
-            "Выйти из програмы",
+            ("Показать книгу", lambda: show_books()),
+            ("Добавить книгу", lambda: add_book()),
+            ("Удалить книгу", lambda: remove_book()),
+            ("Показать книгу по порядковому номеру", lambda: find_book_by_number()),
+            ("Найти книгу по названию", lambda: search_book_by_key('название')),
+            ("Найти книгу по автору", lambda: search_book_by_key('автор')),
+            ("Найти книгу по году", lambda: search_book_by_key('год')),
+            ("Выйти из програмы", lambda: close_librery()),
         ]
 
-        for num, option in enumerate(options):
-            print(f"{num}. {option}")
+        for num, option in enumerate(options, start=1):
+            print(f"{num}. {option[0]}")
 
-        key_library = input("Введите номер и нажмите ENTER")
-        if key_library == "0":
-            show_books()    
-        elif key_library == "1":
-            add_book()    
-        elif key_library == "2":
-            remove_book()    
-        elif key_library == "3":
-            find_book_by_number()
-        elif key_library == "4":
-            search_book_by_key('название')
-        elif key_library == "5":
-            search_book_by_key('автор')
-        elif key_library == "6":
-            search_book_by_key('год')
-        elif key_library == "7":
-            break
-        else:
-            ("Неверная опция, попробуйте ввести другую!")
+
+        option_numders = input("Введите номер и нажмите ENTER")
+        idx = int(option_numders) - 1
+        options[idx][1]()
+
+        
 
 
 
 # тестирование
+
 visit_library()
